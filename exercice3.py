@@ -16,22 +16,33 @@ def JoliePrint(message, code='r'):
         print(vert, emojis['v'], message, reset)
 
 def verifier_extension_fichier(nom_fichier):
-    extension = nom_fichier.split(".")[-1].lower()
-    if extension == "txt":
-        return True
-    elif extension == "doc":
-        return True
-    elif extension == "pdf":
+    extension = nom_fichier.split(".")[-1]
+# je veux une extension seulement en minuscule et pas de majuscule je veux qu'elle soit fausse si c'est la cas ajoute la liste des extensions que je veux [pdf, txt, doc]
+    if extension.islower() and extension in ["pdf", "txt", "doc"]:
         return True
     else:
         return False
+    
+nouveau_fichier = True
 
-while True:
-    nom_fichier = input("Entrez le nom du fichier (ou 'exit' pour quitter) : ")
-    if nom_fichier.lower() == "exit":
-        break
-    if verifier_extension_fichier(nom_fichier):
-        JoliePrint("L'extension est sécurisée.", 'v')
-        break
+while nouveau_fichier:
+    nom_fichier = input("💾 👉 Entrez le nom du fichier : ")
+
+    resultat_verification = verifier_extension_fichier(nom_fichier)
+
+    if resultat_verification:
+        JoliePrint(f"Le nom du fichier '{nom_fichier}' est valide.", 'v')
+        JoliePrint(True, 'v')
     else:
-        JoliePrint("L'extension n'est pas sécurisée.", 'r')
+        JoliePrint(f"Le nom du fichier '{nom_fichier}' est invalide.", 'r')
+        JoliePrint(False, 'r')
+    
+    choix = input("Voulez-vous essayer un autre nom de fichier ? (Oui/Non) : ")
+    
+    while choix.lower() not in ["oui", "non"]:
+        choix = input("Veuillez répondre par 🟢'Oui' ou 🔴'Non' : ")
+    
+    if choix.lower() != "oui":
+        nouveau_fichier = False
+
+    
