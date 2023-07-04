@@ -17,7 +17,7 @@ def JoliePrint(message, code='r'):
 
 def verifier_extension_fichier(nom_fichier):
     extension = nom_fichier.split(".")[-1]
-# je veux une extension seulement en minuscule et pas de majuscule je veux qu'elle soit fausse si c'est la cas ajoute la liste des extensions que je veux [pdf, txt, doc]
+
     if extension.islower() and extension in ["pdf", "txt", "doc"]:
         return True
     else:
